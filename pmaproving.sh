@@ -31,7 +31,7 @@ cd /usr/share
 wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip -O phpmyadmin.zip
 unzip phpmyadmin.zip
 rm -f phpmyadmin.zip
-mv phpmyadmin-*-all-languages phpmyadmin
+mv phpMyAdmin-*-all-languages phpmyadmin
 chmod -R 0755 phpmyadmin
 mkdir /usr/share/phpmyadmin/tmp/
 chown -R www-data:www-data /usr/share/phpmyadmin/tmp/
