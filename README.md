@@ -17,7 +17,7 @@ Run in bash as root.
 ```
 cd ~
 wget -L https://raw.github.com/unblog/pmaproving/main/pmaproving.sh -O pmaproving.sh
-chmod 755 pmaproving.sh
+chmod u+x pmaproving.sh
 ./pmaproving.sh
 ```
 
