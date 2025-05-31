@@ -30,10 +30,10 @@ fi
 ## GET PHPMYADMIN PACKAGE AND UNPACKING
 cd /usr/share
 echo "Download $source"
-file_name=$(wget -nv -t 20 --content-disposition "$source" 2>&1 | cut -d\" -f2)
-echo "unzip $file_name"
-unzip -p -C $file_name
-echo "Rename ${file_name%????} to phpmyadmin"
+file_name=$(wget -nv -t 20 --content-disposition "$source"  2>&1 | cut -d\" -f2)
+echo "Unshrink $file_name"
+unzip -q -C $file_name
+echo "Rename ${file_name%????} phpmyadmin"
 mv ${file_name%????} phpmyadmin
 rm -f $file_name
 chmod -R 0755 phpmyadmin
@@ -42,7 +42,6 @@ chown -R www-data:www-data /usr/share/phpmyadmin/tmp/
 
 ## CREATE APACHE CONFIG
 echo "Create Apache phpmyadmin config"
-
 cat << EOF > /etc/apache2/conf-available/phpmyadmin.conf
 Alias /phpmyadmin /usr/share/phpmyadmin
 
