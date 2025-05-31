@@ -20,6 +20,7 @@ wget -L https://raw.github.com/unblog/pmaproving/main/pmaproving.sh -O pmaprovin
 chmod u+x pmaproving.sh
 ./pmaproving.sh
 ```
+Note. that now is a good opportunity to make your changes in the settings section. You can keep all values ​​as they are, but you should change the password for MYPASS, you'll not need this later; it is only used for database access.
 
 ## Requirement
 

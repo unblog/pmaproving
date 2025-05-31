@@ -62,8 +62,8 @@ Alias /phpmyadmin /usr/share/phpmyadmin
 </Directory>
 EOF
 
-a2enconf phpmyadmin
 apachectl -t
+a2enconf phpmyadmin
 systemctl reload apache2
 
 ## CREATE PHPMYADMIN DATABASE AND USER CREDENTIALS
