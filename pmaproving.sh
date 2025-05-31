@@ -32,7 +32,7 @@ cd /usr/share
 echo "Download $source"
 file_name=$(wget -nv -t 20 --content-disposition "$source" 2>&1 | cut -d\" -f2)
 echo "$file_name"
-unzip -C $file_name
+unzip -p -C $file_name
 mv ${file_name%????} phpmyadmin
 rm -f $file_name
 chmod -R 0755 phpmyadmin
