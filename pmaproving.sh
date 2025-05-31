@@ -13,6 +13,7 @@
 #    vim: expandtab sw=4 ts=4 sts=4:
 #
 ################## SETTINGS #####################
+# Note. 'pma' is default user prset by phpmyadmin
 MYUSER="pma" # DATABASE USER TO ACCESS PHPMYADMIN
 MYPASS="secret123" # YOUR DATABASE USER PASSWORD
 DATABASE="phpmyadmin" # THE PHPMYADMIN DATABASE
