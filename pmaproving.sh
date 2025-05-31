@@ -42,6 +42,7 @@ chown -R www-data:www-data /usr/share/phpmyadmin/tmp/
 
 ## CREATE APACHE CONFIG
 echo "Create Apache phpmyadmin config"
+
 cat << EOF > /etc/apache2/conf-available/phpmyadmin.conf
 Alias /phpmyadmin /usr/share/phpmyadmin
 
