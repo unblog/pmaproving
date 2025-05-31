@@ -30,7 +30,7 @@ fi
 ## GET PHPMYADMIN PACKAGE AND UNPACKING
 cd /usr/share
 echo "Download $source"
-file_name=$(wget -nv -t 20 --content-disposition "$source"  2>&1 | cut -d\" -f2)
+file_name=$(wget -nv -t 20 --content-disposition "$source" 2>&1 | cut -d\" -f2)
 echo "$file_name"
 unzip -C $file_name
 mv ${file_name%????} phpmyadmin
@@ -94,12 +94,12 @@ mysql -uroot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
 randomBlowfishSecret=$(php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;')
 sed -e "s|cfg\['blowfish_secret'\] = ''|cfg['blowfish_secret'] = sodium_hex2bin\('$randomBlowfishSecret'\)|" /usr/share/phpmyadmin/config.sample.inc.php > /usr/share/phpmyadmin/config.inc.php
 
-sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] *= *'pmapass'/ {
+sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] = 'pmapass'/ {
     s|^// ||;
-    s|'pmapass'|'${MYPASS//&/\\&}'|;
+    s|'pmapass'|'${MYPASS}'|;
 }" config.inc.php
 
-sed -i "/\$cfg\['MaxRows'\] = 50;/ s#^//##" config.inc.php
+sed -i "/\/\/ /\$cfg\['MaxRows'\] = 50;/ s#^//##" config.inc.php
 
 echo "Finish!"
-echo "http://localhost/phpmyadmin/"
+echo "Try http://localhost/phpmyadmin/"
