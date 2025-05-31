@@ -16,6 +16,7 @@
 MYUSER="pma"
 MYPASS="secret123"
 DATABASE="phpmyadmin"
+source="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
 ### END SETTINGS #####
 
 ## PREPARE REQUIREMENTS
@@ -28,10 +29,12 @@ fi
 
 ## GET PHPMYADMIN PACKAGE AND UNPACKING
 cd /usr/share
-wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip -O phpmyadmin.zip
-unzip phpmyadmin.zip
-rm -f phpmyadmin.zip
-mv phpMyAdmin-*-all-languages phpmyadmin
+echo "Download $source"
+file_name=$(wget -nv -t 20 --content-disposition "$source"  2>&1 | cut -d\" -f2)
+echo "$file_name"
+unzip -C $file_name
+mv ${file_name%????} phpmyadmin
+rm -f $file_name
 chmod -R 0755 phpmyadmin
 mkdir /usr/share/phpmyadmin/tmp/
 chown -R www-data:www-data /usr/share/phpmyadmin/tmp/
@@ -91,9 +94,9 @@ mysql -uroot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
 randomBlowfishSecret=$(php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;')
 sed -e "s|cfg\['blowfish_secret'\] = ''|cfg['blowfish_secret'] = sodium_hex2bin\('$randomBlowfishSecret'\)|" /usr/share/phpmyadmin/config.sample.inc.php > /usr/share/phpmyadmin/config.inc.php
 
-sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] *= *'pmpass'/ {
+sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] *= *'pmapass'/ {
     s|^// ||;
-    s|'pmpass'|'${MYPASS//&/\\&}'|;
+    s|'pmapass'|'${MYPASS//&/\\&}'|;
 }" config.inc.php
 
 sed -i "/\$cfg\['MaxRows'\] = 50;/ s#^//##" config.inc.php
