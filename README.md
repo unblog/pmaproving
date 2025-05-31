@@ -8,7 +8,7 @@ I wrote `pmaproving.sh` for out-of-the-box use, mainly because deploying phpmyad
 
 ## Purpose
 
-Provisioning of phpMyAdmin on your web server always with requirements quick and smooth. Any settings you change in phpMyAdmin are saved, the default setting in the navigation tree is set to Maximum 50 Elements in Branch.
+Provisioning of phpMyAdmin on your web server always with requirements quick and smooth. Any settings you change in phpMyAdmin are saved, the default setting in the navigation tree is set to Maximum 50 Elements in Branch. You can change settings in the config.inc.php file, or via the small gear in the webUI, these are then saved in the database.
 
 ## Usage:
 
