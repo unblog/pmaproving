@@ -14,8 +14,8 @@
 #
 ################## SETTINGS #####################
 # Note. 'pma' is the phpmyadmin default DB userid
-MYUSER="pma" # DATABASE USER TO ACCESS PHPMYADMIN
-MYPASS="secret123" # YOUR DATABASE USER PASSWORD
+MYUSER="pma" # USER TO ACCESS DATABASE PHPMYADMIN
+MYPASS="secret123" # PMA DATABASE USER PASSWORD
 DATABASE="phpmyadmin" # THE PHPMYADMIN DATABASE
 source="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
 ################## END SETTINGS #################
