@@ -31,8 +31,9 @@ fi
 cd /usr/share
 echo "Download $source"
 file_name=$(wget -nv -t 20 --content-disposition "$source" 2>&1 | cut -d\" -f2)
-echo "$file_name"
+echo "unzip $file_name"
 unzip -p -C $file_name
+echo "Rename ${file_name%????} to phpmyadmin"
 mv ${file_name%????} phpmyadmin
 rm -f $file_name
 chmod -R 0755 phpmyadmin
@@ -40,6 +41,7 @@ mkdir /usr/share/phpmyadmin/tmp/
 chown -R www-data:www-data /usr/share/phpmyadmin/tmp/
 
 ## CREATE APACHE CONFIG
+echo "Create Apache phpmyadmin config"
 cat << EOF > /etc/apache2/conf-available/phpmyadmin.conf
 Alias /phpmyadmin /usr/share/phpmyadmin
 
@@ -60,10 +62,12 @@ Alias /phpmyadmin /usr/share/phpmyadmin
 EOF
 
 a2enconf phpmyadmin
+apachectl -t
 systemctl reload apache2
 
 ## CREATE PHPMYADMIN DATABASE AND USER CREDENTIALS
 # If /root/.my.cnf exists then it won't ask for root password
+echo "Create phpmyadmin database and grant user access"
 if [ -f /root/.my.cnf ]; then
 
     mysql -e "CREATE DATABASE ${DATABASE} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
@@ -101,5 +105,6 @@ sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] *= *'pmapass'/ {
 
 sed -i "/\/\/\$cfg\['MaxRows'\] = 50\;/ s#^//##" /usr/share/phpmyadmin/config.inc.php
 
-echo "Finish!"
-echo "Try http://localhost/phpmyadmin/"
+echo "Provisioning Finish!"
+echo "Note. phpMyAdmin using user and password as you set in the settings section."
+echo "http://localhost/phpmyadmin/"
