@@ -8,7 +8,7 @@ I wrote `pmaproving.sh` primarily because deploying phpmyadmin from the apt repo
 
 ## Purpose
 
-Provisioning of phpMyAdmin on your web server always with requirements quick and smooth.
+Provisioning of phpMyAdmin on your web server always with requirements quick and smooth. Any settings you change in phpMyAdmin are saved, the default setting in the navigation tree is set to Maximum 50 Elements in Branch.
 
 ## Usage:
 
