@@ -107,5 +107,5 @@ sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] *= *'pmapass'/ {
 sed -i "/\/\/\$cfg\['MaxRows'\] = 50\;/ s#^//##" /usr/share/phpmyadmin/config.inc.php
 
 echo "Provisioning Finish!"
-echo "Note. phpMyAdmin sign in using your user and password as you set in MariaDB."
+echo "Note. phpMyAdmin sign in using your crendentials as you set in MariaDB."
 echo "http://localhost/phpmyadmin/"
