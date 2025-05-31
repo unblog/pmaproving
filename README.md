@@ -4,7 +4,7 @@ This bash script is provisioning phpMyAdmin on GNU/Linux, written in GNU bash v5
 
 ## Preface
 
-I wrote `pmaproving.sh` primarily because deploying phpmyadmin from the apt repository proved impractical when using different PHP versions, especially in development environments. I use Apache2 in WSL. To avoid time-consuming setup with every installation and to always provide the same requirements fast and smooth.
+I wrote `pmaproving.sh` for out-of-the-box use, mainly because deploying phpmyadmin from the Apt repository proved impractical when using different PHP versions, especially in development environments.. I use Apache2 in WSL. To avoid time-consuming setup with every installation and to always provide the same requirements fast and smooth.
 
 ## Purpose
 
@@ -23,7 +23,7 @@ chmod u+x pmaproving.sh
 
 ## Requirement
 
-No special requirements are expected; Apart from that, a ready-to-use web server with Apache with PHP and MariaDB, the unzip and wget packages will be provided automatically if not already exist.
+No special requirements are expected; apart of course, a ready-to-use Apache web server with PHP and MariaDB, the unzip and wget packages will be provided automatically if not already exist.
 
 ## Addendum
 
