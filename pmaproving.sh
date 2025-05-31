@@ -12,12 +12,12 @@
 #
 #    vim: expandtab sw=4 ts=4 sts=4:
 #
-###### SETTINGS ######
-MYUSER="pma"
-MYPASS="secret123"
-DATABASE="phpmyadmin"
+################## SETTINGS #####################
+MYUSER="pma" # DATABASE USER TO ACCESS PHPMYADMIN
+MYPASS="secret123" # YOUR DATABASE USER PASSWORD
+DATABASE="phpmyadmin" # THE PHPMYADMIN DATABASE
 source="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
-### END SETTINGS #####
+################## END SETTINGS #################
 
 ## PREPARE REQUIREMENTS
 if [ ! -f /usr/bin/unzip ]; then
@@ -106,5 +106,5 @@ sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] *= *'pmapass'/ {
 sed -i "/\/\/\$cfg\['MaxRows'\] = 50\;/ s#^//##" /usr/share/phpmyadmin/config.inc.php
 
 echo "Provisioning Finish!"
-echo "Note. phpMyAdmin using user and password as you set in the settings section."
+echo "Note. phpMyAdmin sign in using your user and password as you set in MariaDB."
 echo "http://localhost/phpmyadmin/"
