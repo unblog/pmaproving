@@ -86,7 +86,7 @@ else
     mysql -uroot -p${rootpasswd} -e "GRANT ALL PRIVILEGES ON ${DATABASE}.* TO '${MYUSER}'@'localhost';"
     mysql -uroot -p${rootpasswd} -e "FLUSH PRIVILEGES;"
 fi
-
+# create SQL tables
 mysql -uroot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
 
 # create phpMyAdmin configuration from the saample file in the same way generating the blowfish_secret for cookie auth.
