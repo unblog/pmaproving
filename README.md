@@ -8,7 +8,7 @@ I wrote `pmaproving.sh` for out-of-the-box deployment, primarily because deployi
 
 ## Purpose
 
-Provisioning of phpMyAdmin on your web server always with requirements quick and smooth. Any settings you change in phpMyAdmin are saved, the default setting in the navigation tree is set to Maximum 50 Elements in Branch, Of course you can increase and decrease the values. You can change settings in the config.inc.php file, or via the small gear in the webUI, these are then saved in the database.
+Provisioning of phpMyAdmin on your web server always with requirements quick and smooth. Any settings you change in phpMyAdmin are saved, the default setting in the navigation tree is set to Maximum 50 Elements in Branch, of course you can increase and decrease the values. You can change settings in the config.inc.php file, or via the small gear in the webUI, these are then saved in the database.
 
 ## Usage:
 
@@ -20,7 +20,7 @@ wget -L https://raw.github.com/unblog/pmaproving/main/pmaproving.sh -O pmaprovin
 chmod u+x pmaproving.sh
 ./pmaproving.sh
 ```
-Note. that now is a good opportunity to make your changes in the settings section. You can keep all values ​​as they are, but you should change the password for MYPASS, you'll not need this later; it is only used for database access.
+Note. now is a good opportunity to make your changes in the settings section. You can keep all values ​​as they are, but you should change the password for MYPASS, you'll not need this later; it is only used for database access.
 
 ## Requirement
 
