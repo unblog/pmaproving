@@ -14,10 +14,10 @@
 #
 ################## SETTINGS #####################
 # Note. 'pma' is the phpmyadmin default DB userid
-MYUSER="pma" # USER TO ACCESS DATABASE PHPMYADMIN
-MYPASS="secret123"   # PMA DATABASE USER PASSWORD
-DATABASE="phpmyadmin"   # THE PHPMYADMIN DATABASE
-source="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
+MYUSER="pma" #### USER ACCESS PHPMYADMIN DATABASE
+MYPASS="secret123" ### USER PASSWORD PMA DATABASE
+DATABASE="phpmyadmin" ### THE PHPMYADMIN DATABASE
+SOURCE="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
 ################## END SETTINGS #################
 
 ## PREPARE REQUIREMENTS
@@ -28,10 +28,10 @@ if [ ! -f /usr/bin/wget ]; then
     apt install -y wget
 fi
 
-## GET PHPMYADMIN PACKAGE & UNPACKING
+## GET  PACKAGE & UNPACKING
 cd /usr/share
-echo "Download $source"
-file_name=$(wget -nv -t 20 --content-disposition "$source"  2>&1 | cut -d\" -f2)
+echo "Download $SOURCE"
+file_name=$(wget -nv -t 20 --content-disposition "$SOURCE"  2>&1 | cut -d\" -f2)
 echo "Unshrink $file_name"
 unzip -q -C $file_name
 echo "Rename ${file_name%????} phpmyadmin"
@@ -66,7 +66,7 @@ apachectl -t
 a2enconf phpmyadmin
 systemctl reload apache2
 
-## CREATE PHPMYADMIN DATABASE AND USER CREDENTIALS
+## CREATE DATABASE AND USER CREDENTIALS
 # If /root/.my.cnf exists then it won't ask for root password
 echo "Create phpmyadmin database and grant user access"
 if [ -f /root/.my.cnf ]; then
@@ -90,11 +90,11 @@ fi
 mysql -uroot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
 
 # create phpMyAdmin configuration from the saample file in the same way generating the blowfish_secret for cookie auth.
-# instead of - cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
+# cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
 # php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;'
 
-## ADD PHPMYADMIN SETTINGS
-# /usr/share/phpmyadmin/config.inc.php
+## ADD BLOWFISH SECRET & CHANGE SETTINGS
+# file path /usr/share/phpmyadmin/config.inc.php
 
 randomBlowfishSecret=$(php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;')
 sed -e "s|cfg\['blowfish_secret'\] = ''|cfg['blowfish_secret'] = sodium_hex2bin\('$randomBlowfishSecret'\)|" /usr/share/phpmyadmin/config.sample.inc.php > /usr/share/phpmyadmin/config.inc.php
@@ -107,5 +107,5 @@ sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] *= *'pmapass'/ {
 sed -i "/\/\/\$cfg\['MaxRows'\] = 50\;/ s#^//##" /usr/share/phpmyadmin/config.inc.php
 
 echo "Provisioning Finish!"
-echo "Note. phpMyAdmin sign in using your credentials as you set in MariaDB."
+echo "Note. phpMyAdmin sign in using credentials as you set in MariaDB."
 echo "http://localhost/phpmyadmin/"
