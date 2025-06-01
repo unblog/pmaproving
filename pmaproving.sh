@@ -15,8 +15,8 @@
 ################## SETTINGS #####################
 # Note. 'pma' is the phpmyadmin default DB userid
 MYUSER="pma" # USER TO ACCESS DATABASE PHPMYADMIN
-MYPASS="secret123" # PMA DATABASE USER PASSWORD
-DATABASE="phpmyadmin" # THE PHPMYADMIN DATABASE
+MYPASS="secret123"   # PMA DATABASE USER PASSWORD
+DATABASE="phpmyadmin"   # THE PHPMYADMIN DATABASE
 source="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
 ################## END SETTINGS #################
 
@@ -28,7 +28,7 @@ if [ ! -f /usr/bin/wget ]; then
     apt install -y wget
 fi
 
-## GET PHPMYADMIN PACKAGE AND UNPACKING
+## GET PHPMYADMIN PACKAGE & UNPACKING
 cd /usr/share
 echo "Download $source"
 file_name=$(wget -nv -t 20 --content-disposition "$source"  2>&1 | cut -d\" -f2)
