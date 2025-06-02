@@ -28,4 +28,4 @@ No special requirements are expected; apart of course, a ready-to-use Apache web
 
 ## Addendum
 
-Please leave a {comment}(https://github.com/unblog/pmaproving/discussions) for suggestions, additions, deviations or troubleshooting.
+Please leave a [comment](https://github.com/unblog/pmaproving/discussions) for suggestions, additions, deviations or troubleshooting.
