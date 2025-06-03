@@ -93,7 +93,7 @@ mysql -uroot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
 # cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
 # php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;'
 
-## ADD BLOWFISH SECRET & CHANGE SETTINGS
+## ADD BLOWFISH SECRET ADD CHANGE SETTINGS
 # file path /usr/share/phpmyadmin/config.inc.php
 
 randomBlowfishSecret=$(php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;')
