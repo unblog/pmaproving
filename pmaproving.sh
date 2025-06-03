@@ -12,7 +12,7 @@
 #
 #    vim: expandtab sw=4 ts=4 sts=4:
 #
-######################## SETTINGS ########################
+######################## SETTINGS #######################
 # Note. default userid 'pma' to access phpmyadmin database
 MYUSER="pma" ######## USERID TO ACCESS PHPMYADMIN DATABASE
 MYPASS="secret123" ###### USER PASSWORD TO ACCESS DATABASE
@@ -27,8 +27,8 @@ fi
 if [ ! -f /usr/bin/wget ]; then
     apt install -y wget
 fi
-
-## GET PACKAGE & UNPACKING
+## DOWNLOAD PACKAGE AND UNPACKING
+# Note. I use wget like this because I suspect that the download file could change at some point!
 cd /usr/share
 echo "Download $SOURCE"
 file_name=$(wget -nv -t 20 --content-disposition "$SOURCE"  2>&1 | cut -d\" -f2)
@@ -90,22 +90,20 @@ fi
 mysql -uroot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
 
 # create phpMyAdmin configuration from the saample file in the same way generating the blowfish_secret for cookie auth.
-# cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
+# actually cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
 # php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;'
-
-## ADD BLOWFISH SECRET ADD CHANGE SETTINGS
+## ADD BLOWFISH SECRET
 # file path /usr/share/phpmyadmin/config.inc.php
-
 randomBlowfishSecret=$(php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;')
 sed -e "s|cfg\['blowfish_secret'\] = ''|cfg['blowfish_secret'] = sodium_hex2bin\('$randomBlowfishSecret'\)|" /usr/share/phpmyadmin/config.sample.inc.php > /usr/share/phpmyadmin/config.inc.php
-
+## ADD SECRET TO CONFIG
 sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] *= *'pmapass'/ {
     s|^// ||;
     s|'pmapass'|'${MYPASS//&/\\&}'|;
 }" /usr/share/phpmyadmin/config.inc.php
-
+## CHANGE MAX ROWS
 sed -i "/\/\/\$cfg\['MaxRows'\] = 50\;/ s#^//##" /usr/share/phpmyadmin/config.inc.php
-
+# done
 echo "Provisioning Finish!"
 echo "Note. phpMyAdmin sign in using credentials as you set in MariaDB."
 echo "http://localhost/phpmyadmin/"
