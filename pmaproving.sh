@@ -12,13 +12,13 @@
 #
 #    vim: expandtab sw=4 ts=4 sts=4:
 #
-################## SETTINGS #####################
-# Note. 'pma' is the phpmyadmin default DB userid
-MYUSER="pma" #### USER ACCESS PHPMYADMIN DATABASE
-MYPASS="secret123" ### USER PASSWORD PMA DATABASE
-DATABASE="phpmyadmin" ### THE PHPMYADMIN DATABASE
+######################## SETTINGS ########################
+# Note. default userid 'pma' to access phpmyadmin database
+MYUSER="pma" ######## USERID TO ACCESS PHPMYADMIN DATABASE
+MYPASS="secret123" ###### USER PASSWORD TO ACCESS DATABASE
+DATABASE="phpmyadmin" ### DATABASE NAME DEFAULT PHPMYADMIN
 SOURCE="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
-################## END SETTINGS #################
+###################### END SETTINGS ######################
 
 ## PREPARE REQUIREMENTS
 if [ ! -f /usr/bin/unzip ]; then
@@ -28,7 +28,7 @@ if [ ! -f /usr/bin/wget ]; then
     apt install -y wget
 fi
 
-## GET  PACKAGE & UNPACKING
+## GET PACKAGE & UNPACKING
 cd /usr/share
 echo "Download $SOURCE"
 file_name=$(wget -nv -t 20 --content-disposition "$SOURCE"  2>&1 | cut -d\" -f2)

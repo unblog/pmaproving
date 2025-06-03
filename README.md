@@ -1,6 +1,6 @@
 # pmaproving
 
-This bash script provisioning phpMyAdmin on GNU/Linux, written in GNU bash v5.1.16(1) on Debian 11 and ran also with Ubuntu 22.04.3 LTS.
+A Bash script to provisioning phpMyAdmin under GNU/Linux, written in GNU bash v5.1.16(1) on Debian 11 and ran also with Ubuntu 22.04.3 LTS.
 
 ## Preface
 
