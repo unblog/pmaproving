@@ -12,7 +12,7 @@ Provisioning of phpMyAdmin on your web server always with requirements quick and
 
 ## Usage:
 
-Run in bash elevated as root.
+Run in bash elevated as root
 
 ```
 cd ~
