@@ -12,13 +12,13 @@
 #
 #    vim: expandtab sw=4 ts=4 sts=4:
 #
-######################## SETTINGS #######################
-# Note. default userid 'pma' to access phpmyadmin database
-MYUSER="pma" ######## USERID TO ACCESS PHPMYADMIN DATABASE
-MYPASS="secret123" ###### USER PASSWORD TO ACCESS DATABASE
-DATABASE="phpmyadmin" ### DATABASE NAME DEFAULT PHPMYADMIN
+##################### SETTINGS ####################
+# Note. default userid 'pma' to use database access
+MYUSER="pma" ## USER FOR ACCESS DATABASE PHMYADMIN
+MYPASS="secret123" ## USER PASSWORD ACCESS DATABASE
+DATABASE="phpmyadmin" # DATABASE DEFAULT PHPMYADMIN
 SOURCE="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
-###################### END SETTINGS ######################
+################### END SETTINGS ##################
 
 ## PREPARE REQUIREMENTS
 if [ ! -f /usr/bin/unzip ]; then
@@ -28,7 +28,7 @@ if [ ! -f /usr/bin/wget ]; then
     apt install -y wget
 fi
 ## DOWNLOAD PACKAGE AND UNPACKING
-# Note. I use wget like this because I suspect that the download file could change at some point!
+# Note. I ran wget like this because I suspect that the file name could change at some point!
 cd /usr/share
 echo "Download $SOURCE"
 file_name=$(wget -nv -t 20 --content-disposition "$SOURCE"  2>&1 | cut -d\" -f2)
@@ -93,7 +93,6 @@ mysql -uroot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
 # actually cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
 # php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;'
 ## ADD BLOWFISH SECRET
-# file path /usr/share/phpmyadmin/config.inc.php
 randomBlowfishSecret=$(php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;')
 sed -e "s|cfg\['blowfish_secret'\] = ''|cfg['blowfish_secret'] = sodium_hex2bin\('$randomBlowfishSecret'\)|" /usr/share/phpmyadmin/config.sample.inc.php > /usr/share/phpmyadmin/config.inc.php
 ## ADD SECRET TO CONFIG
@@ -105,5 +104,5 @@ sed -i "/\/\/ \$cfg\['Servers'\]\[\$i\]\['controlpass'\] *= *'pmapass'/ {
 sed -i "/\/\/\$cfg\['MaxRows'\] = 50\;/ s#^//##" /usr/share/phpmyadmin/config.inc.php
 # done
 echo "Provisioning Finish!"
-echo "Note. phpMyAdmin sign in using credentials as you set in MariaDB."
+echo "Note. phpMyAdmin sign in using user and secret as you set in MariaDB."
 echo "http://localhost/phpmyadmin/"
