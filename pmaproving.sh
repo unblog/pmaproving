@@ -12,13 +12,13 @@
 #
 #    vim: expandtab sw=4 ts=4 sts=4:
 #
-##################### SETTINGS ####################
-# Note. default userid 'pma' to use database access
-MYUSER="pma" ## USER FOR ACCESS DATABASE PHMYADMIN
-MYPASS="secret123" ## USER PASSWORD ACCESS DATABASE
-DATABASE="phpmyadmin" # DATABASE DEFAULT PHPMYADMIN
+#################### SETTINGS ####################
+## Note. default userid 'pma' to database access #
+MYUSER="pma" # USERID TO ACCESS DATABASE PHMYADMIN
+MYPASS="secret123" # USER PASSWORD ACCESS DATABASE
+DATABASE="phpmyadmin" # TO CREATE DEFAULT DATABASE
 SOURCE="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
-################### END SETTINGS ##################
+################## END SETTINGS ##################
 
 ## PREPARE REQUIREMENTS
 if [ ! -f /usr/bin/unzip ]; then
