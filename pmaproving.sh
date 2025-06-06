@@ -13,13 +13,13 @@
 #    vim: expandtab sw=4 ts=4 sts=4:
 #
 #################### SETTINGS ####################
-## Note. default userid 'pma' to database access #
+# Note. default user 'pma' use for database access
 MYUSER="pma" # USERID TO ACCESS DATABASE PHMYADMIN
 MYPASS="secret123" # USER PASSWORD ACCESS DATABASE
 DATABASE="phpmyadmin" # TO CREATE DEFAULT DATABASE
 SOURCE="https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip"
 ################## END SETTINGS ##################
-
+#
 ## PREPARE REQUIREMENTS
 if [ ! -f /usr/bin/unzip ]; then
     apt install -y unzip
@@ -40,9 +40,8 @@ rm -f $file_name
 chmod -R 0755 phpmyadmin
 mkdir /usr/share/phpmyadmin/tmp/
 chown -R www-data:www-data /usr/share/phpmyadmin/tmp/
-
 ## CREATE APACHE CONFIG
-echo "Create Apache phpmyadmin"
+echo "Create Apache configuration"
 cat << EOF > /etc/apache2/conf-available/phpmyadmin.conf
 Alias /phpmyadmin /usr/share/phpmyadmin
 
@@ -61,11 +60,11 @@ Alias /phpmyadmin /usr/share/phpmyadmin
     Require all denied
 </Directory>
 EOF
-
+# syntax check enable and reload config
+echo "Check Apache configuration"
 apachectl -t
 a2enconf phpmyadmin
 systemctl reload apache2
-
 ## CREATE DATABASE AND USER CREDENTIALS
 # If /root/.my.cnf exists then it won't ask for root password
 echo "Create phpmyadmin database and grant user access"
@@ -88,7 +87,6 @@ else
 fi
 # create SQL tables
 mysql -uroot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
-
 # create phpMyAdmin configuration from the saample file in the same way generating the blowfish_secret for cookie auth.
 # actually cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
 # php -r 'echo bin2hex(random_bytes(32)) . PHP_EOL;'
