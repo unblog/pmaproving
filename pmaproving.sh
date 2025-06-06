@@ -63,7 +63,7 @@ EOF
 # syntax check enable and reload config
 echo "Check Apache configuration"
 apachectl -t
-a2enconf phpmyadmin
+a2enconf -q phpmyadmin
 systemctl reload apache2
 ## CREATE DATABASE AND USER CREDENTIALS
 # If /root/.my.cnf exists then it won't ask for root password
