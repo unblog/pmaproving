@@ -28,9 +28,9 @@ if [ ! -f /usr/bin/wget ]; then
     apt install -y wget
 fi
 ## DOWNLOAD PACKAGE AND UNPACKING
-# Note. I ran wget like this because I suspect that the file name could change at some point!
 cd /usr/share
 echo "Download $SOURCE"
+# Note. use wget like this because I suspect that the file name could change at some point!
 file_name=$(wget -nv -t 20 --content-disposition "$SOURCE"  2>&1 | cut -d\" -f2)
 echo "Unshrink $file_name"
 unzip -q -C $file_name
@@ -103,4 +103,5 @@ sed -i "/\/\/\$cfg\['MaxRows'\] = 50\;/ s#^//##" /usr/share/phpmyadmin/config.in
 # done
 echo "Provisioning Finish!"
 echo "Note. phpMyAdmin sign in using user and secret as you set in MariaDB."
+# Note. change the URL with your hostname or domain name you use.
 echo "http://localhost/phpmyadmin/"
